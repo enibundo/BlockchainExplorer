@@ -1,0 +1,153 @@
+{
+  "version": 3,
+  "targets": {
+    ".NETCoreApp,Version=v3.1": {
+      "BigInteger/1.0.7": {
+        "type": "package",
+        "compile": {
+          "lib/net20/BigInteger.dll": {}
+        },
+        "runtime": {
+          "lib/net20/BigInteger.dll": {}
+        }
+      },
+      "RIPEMD160/1.0.1": {
+        "type": "package",
+        "compile": {
+          "lib/netcoreapp2.0/RIPEMD160.dll": {}
+        },
+        "runtime": {
+          "lib/netcoreapp2.0/RIPEMD160.dll": {}
+        }
+      },
+      "ChainExplorer/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "dependencies": {
+          "RIPEMD160": "1.0.1"
+        },
+        "compile": {
+          "bin/placeholder/ChainExplorer.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/ChainExplorer.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "BigInteger/1.0.7": {
+      "sha512": "PaOPKvMc7s/RygNuD+4eMCBuzQOsQY8o4ja7If1fScGgVX/sq6LfYzXHXxqlfrh2gCl5k9yLSUZQw6edIIeI+w==",
+      "type": "package",
+      "path": "biginteger/1.0.7",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "biginteger.1.0.7.nupkg.sha512",
+        "biginteger.nuspec",
+        "lib/net20/BigInteger.dll"
+      ]
+    },
+    "RIPEMD160/1.0.1": {
+      "sha512": "cWq7BWkI4pbNcyYferLzIRSm3bO9BwSvzpoKJjtYwoj8ybKKGyOOA6pzhwjicyFgwmM52uxlYQrnNflTofolOw==",
+      "type": "package",
+      "path": "ripemd160/1.0.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/netcoreapp2.0/RIPEMD160.dll",
+        "ripemd160.1.0.1.nupkg.sha512",
+        "ripemd160.nuspec"
+      ]
+    },
+    "ChainExplorer/1.0.0": {
+      "type": "project",
+      "path": "../ChainExplorer/ChainExplorer.csproj",
+      "msbuildProject": "../ChainExplorer/ChainExplorer.csproj"
+    }
+  },
+  "projectFileDependencyGroups": {
+    ".NETCoreApp,Version=v3.1": [
+      "BigInteger >= 1.0.7",
+      "ChainExplorer >= 1.0.0"
+    ]
+  },
+  "packageFolders": {
+    "/home/eni/.nuget/packages/": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "/home/eni/Documents/code/BlockchainExplorer/ChainExplorerWeb/ChainExplorerWeb.csproj",
+      "projectName": "ChainExplorerWeb",
+      "projectPath": "/home/eni/Documents/code/BlockchainExplorer/ChainExplorerWeb/ChainExplorerWeb.csproj",
+      "packagesPath": "/home/eni/.nuget/packages/",
+      "outputPath": "/home/eni/Documents/code/BlockchainExplorer/ChainExplorerWeb/obj/",
+      "projectStyle": "PackageReference",
+      "configFilePaths": [
+        "/home/eni/.nuget/NuGet/NuGet.Config"
+      ],
+      "originalTargetFrameworks": [
+        "netcoreapp3.1"
+      ],
+      "sources": {
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "projectReferences": {
+            "/home/eni/Documents/code/BlockchainExplorer/ChainExplorer/ChainExplorer.csproj": {
+              "projectPath": "/home/eni/Documents/code/BlockchainExplorer/ChainExplorer/ChainExplorer.csproj"
+            }
+          }
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      }
+    },
+    "frameworks": {
+      "netcoreapp3.1": {
+        "dependencies": {
+          "BigInteger": {
+            "target": "Package",
+            "version": "[1.0.7, )"
+          }
+        },
+        "imports": [
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48"
+        ],
+        "assetTargetFallback": true,
+        "warn": true,
+        "frameworkReferences": {
+          "Microsoft.AspNetCore.App": {
+            "privateAssets": "none"
+          },
+          "Microsoft.NETCore.App": {
+            "privateAssets": "all"
+          }
+        },
+        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/3.1.100/RuntimeIdentifierGraph.json"
+      }
+    }
+  },
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'BigInteger 1.0.7' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework '.NETCoreApp,Version=v3.1'. This package may not be fully compatible with your project.",
+      "libraryId": "BigInteger",
+      "targetGraphs": [
+        ".NETCoreApp,Version=v3.1"
+      ]
+    }
+  ]
+}

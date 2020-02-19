@@ -1,0 +1,8 @@
+/home/eni/Documents/code/BlockchainExplorer/ChainExplorer/bin/Debug/netcoreapp3.1/ChainExplorer.deps.json
+/home/eni/Documents/code/BlockchainExplorer/ChainExplorer/bin/Debug/netcoreapp3.1/ChainExplorer.dll
+/home/eni/Documents/code/BlockchainExplorer/ChainExplorer/bin/Debug/netcoreapp3.1/ChainExplorer.pdb
+/home/eni/Documents/code/BlockchainExplorer/ChainExplorer/obj/Debug/netcoreapp3.1/ChainExplorer.csprojAssemblyReference.cache
+/home/eni/Documents/code/BlockchainExplorer/ChainExplorer/obj/Debug/netcoreapp3.1/ChainExplorer.AssemblyInfoInputs.cache
+/home/eni/Documents/code/BlockchainExplorer/ChainExplorer/obj/Debug/netcoreapp3.1/ChainExplorer.AssemblyInfo.cs
+/home/eni/Documents/code/BlockchainExplorer/ChainExplorer/obj/Debug/netcoreapp3.1/ChainExplorer.dll
+/home/eni/Documents/code/BlockchainExplorer/ChainExplorer/obj/Debug/netcoreapp3.1/ChainExplorer.pdb

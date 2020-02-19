@@ -1,0 +1,98 @@
+@page "/blockexplorer"
+
+@using System.Net
+@using ChainExplorer.Script.Validator
+@using Microsoft.AspNetCore.WebUtilities
+
+@using global::ChainExplorer.Reader
+@using global::ChainExplorer.Model
+
+@inject BitcoinReader BitcoinReader
+@inject TransactionValidator TransactionValidator
+@inject NavigationManager NavigationManager
+
+<h1>Chain Rider : a BTC Block Parser</h1>
+
+Block Id: <input type="text" @bind="@BlockId" width="500" class="form-control"/> 
+<br/>
+<button class="btn btn-primary btn-sm" @onclick="@ParseBlock">Parse Block</button><br/>
+<hr>
+
+@{
+    var uri = NavigationManager.ToAbsoluteUri(NavigationManager.Uri);
+    var parameters = QueryHelpers.ParseQuery(uri.Query);
+    
+    if (parameters.TryGetValue("block", out var blockId))
+    {
+        BlockId = blockId;
+        ParseBlock();
+    }
+ }
+
+@if (Block.HasValue)
+{
+    <div  class="alert alert-primary" role="alert">
+        Version: @PrintByteArr(@Block.Value.Version.ToArray())<br/>
+        PrevBlock: @PrintByteArr(@Block.Value.PreviousBlockHash.ToArray())<br/>
+        Bits: @PrintByteArr(@Block.Value.Bits.ToArray())<br/>
+        Nonce: @PrintByteArr(@Block.Value.Nonce.ToArray())<br/>
+    </div>
+    
+    <ul style="list-style: none;">
+    @for (var i = 0; i < _transactions.Count; i++)
+    {
+        var transaction = _transactions[i];
+        
+        <li> 
+            
+            <span class="badge badge-primary">TRX @i </span> : @PrintByteArr(@transaction.TrxId)<br/>
+            
+            <span class="oi oi-account-login">&nbsp;</span>Inputs: @transaction.TransactionInputs.Length<br/>
+            <span class="oi oi-account-logout">&nbsp;</span>Outputs: @transaction.TransactionOutputs.Length<br/> 
+            
+            <button class="btn btn-info" @onclick="@(e=>TransactionScript(@transaction))">visualize script</button>
+
+            <hr >
+        </li>
+    }
+    </ul>
+
+}
+
+@code {
+
+    
+    private string BlockId { get; set; }
+    private Block? Block;
+    private readonly IList<Transaction> _transactions = new List<Transaction>();
+    private bool BlockParseRequested { get; set; } = false;
+    
+    private void TransactionScript(Transaction trx)
+    {
+        var script = BitConverter.ToString(trx.Script).Replace("-", string.Empty);
+        NavigationManager.NavigateTo($"/trxscript?script={script}", true); 
+    }
+
+    private string PrintByteArr(byte[] arr)
+    {
+        return BitConverter.ToString(arr).Replace("-", string.Empty).ToLower();
+    }
+
+    private async void ParseBlock()
+    {
+        BlockParseRequested = true;
+
+        // get ascii-hex from blockchain.info,
+        // todo: run and query own node
+        var url = $"https://blockchain.info/block/{BlockId}?format=hex";
+
+        var objResponse = WebRequest.Create(url).GetResponse();
+        var reader = new AsciiFileBinaryReader(new HexReader(), objResponse.GetResponseStream());
+        var loggedReader = new LoggedBinaryReader(reader);
+        
+        Block = BitcoinReader.ReadBlock(loggedReader, (t =>
+        {
+            _transactions.Add(t);
+        }));
+    }
+}

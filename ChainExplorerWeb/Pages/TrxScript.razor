@@ -1,0 +1,40 @@
+@page "/trxscript"
+@using ChainExplorer.Reader
+@using ChainExplorer.Script.Validator
+@using Microsoft.AspNetCore.WebUtilities
+@inject NavigationManager NavigationManager
+@inject TransactionValidator TransactionValidator
+@inject HexReader HexReader
+<textarea rows="4" cols="50" class="form-control" @bind="@Script">
+
+</textarea>
+<br/>
+
+<button class="btn btn-success" @onclick="@ParseScript">Parse script</button>
+
+Result: @Result
+
+@code {
+    
+    private string Script { get; set; }
+    private string Result { get; set; } = "NOK";
+    
+    private void ParseScript()
+    {
+        var scriptInBytes = HexReader.ToByteArray(Script);
+        var isValid = TransactionValidator.IsValid(scriptInBytes);
+        
+        Result = isValid.ToString();
+    }
+    
+    protected override async Task OnInitializedAsync()
+    {
+        var uri = NavigationManager.ToAbsoluteUri(NavigationManager.Uri);
+        var parameters = QueryHelpers.ParseQuery(uri.Query);
+
+        if (parameters.ContainsKey("script"))
+        {
+            Script = parameters["script"];
+        }
+    }
+}

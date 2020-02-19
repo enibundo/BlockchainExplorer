@@ -1,0 +1,41 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v3.1",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v3.1": {
+      "ChainExplorer/1.0.0": {
+        "dependencies": {
+          "RIPEMD160": "1.0.1"
+        },
+        "runtime": {
+          "ChainExplorer.dll": {}
+        }
+      },
+      "RIPEMD160/1.0.1": {
+        "runtime": {
+          "lib/netcoreapp2.0/RIPEMD160.dll": {
+            "assemblyVersion": "1.0.1.0",
+            "fileVersion": "1.0.1.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "ChainExplorer/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "RIPEMD160/1.0.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-cWq7BWkI4pbNcyYferLzIRSm3bO9BwSvzpoKJjtYwoj8ybKKGyOOA6pzhwjicyFgwmM52uxlYQrnNflTofolOw==",
+      "path": "ripemd160/1.0.1",
+      "hashPath": "ripemd160.1.0.1.nupkg.sha512"
+    }
+  }
+}

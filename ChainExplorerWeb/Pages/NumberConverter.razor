@@ -1,0 +1,84 @@
+@page "/numberconverter"
+@using ChainExplorerWeb.Data
+@using global::ChainExplorer.Reader
+
+@inject NumConverter NumConverter
+
+<table class="table table-bordered">
+
+<thead class="thead-dark">
+<tr>
+<th scope="col">Conversion between different number representations:</th>
+<th scope="col">Result</th>
+</tr>
+
+</thead>
+
+
+<tr>
+<td>
+<h4>Hexadecimal to decimal</h4>
+<input type="text" class="form-control" @bind="@HexToDec"/><br/>
+<button class="btn btn-info" @onclick="@ConvertHexToDec">Convert</button>
+</td>
+<td>@ResultHexToDec</td>
+</tr>
+
+<tr>
+<td>
+<h4>Decimal hexadecimal</h4>
+<input type="text" class="form-control" @bind="@DecToHex"/><br/>
+<button class="btn btn-info" @onclick="@ConvertDecToHex">Convert</button>
+</td>
+<td>@ResultDecToHex</td>
+</tr>
+
+<tr>
+<td>
+<h4>Hexadecimal little endian to hexadecimal</h4>
+<input type="text" class="form-control" @bind="@HexLeToHex"/><br/>
+<button class="btn btn-info" @onclick="@ConvertHexLeToHex">Convert</button>
+</td>
+<td>@ResultHexLeToHex</td>
+</tr>
+
+
+<tr>
+<td>
+<h4>VarInt to decimal</h4>
+<input type="text" class="form-control" @bind="@VarIntToDecimal"/><br/>
+<button class="btn btn-info" @onclick="@ConvertVarIntToDecimal">Convert</button>
+</td>
+<td>@ResultVarIntToDec</td>
+</tr>
+</table>
+
+// todo: Champ Bits -> Cible correspondante<br>
+// todo : Cible -> Difficulté
+
+@code {
+    
+    private string HexToDec { get; set; }
+    private string DecToHex { get; set; }
+    private string HexLeToHex { get; set; }
+    private string VarIntToDecimal { get; set; }
+
+    private string ResultHexToDec{ get; set; }
+    private string ResultDecToHex { get; set; }
+    private string ResultHexLeToHex { get; set; }
+    private string ResultVarIntToDec { get; set; }
+    
+    private void ConvertHexToDec()
+        => ResultHexToDec = NumConverter.ConvertHexToDec(HexToDec);
+    
+    
+    private void ConvertDecToHex()
+        => ResultDecToHex = NumConverter.ConvertDecToHex(DecToHex);
+
+
+    private void ConvertHexLeToHex()
+        => ResultHexLeToHex = NumConverter.ConvertHexLeToHex(HexLeToHex);
+
+    private void ConvertVarIntToDecimal()
+        => ResultVarIntToDec = NumConverter.ConvertVarIntToDecimal(VarIntToDecimal);
+}
