@@ -51,10 +51,16 @@
 </td>
 <td>@ResultVarIntToDec</td>
 </tr>
-</table>
 
-// todo: Champ Bits -> Cible correspondante<br>
-// todo : Cible -> Difficulté
+<tr>
+<td>
+<h4>Bits to Difficulty</h4>
+<input type="text" class="form-control" @bind="@BitsToDifficulty"/><br/>
+<button class="btn btn-info" @onclick="@ConvertBitsToDifficulty">Convert</button>
+</td>
+<td>@ResultBitsToDifficulty</td>
+</tr>
+</table>
 
 @code {
     
@@ -62,15 +68,16 @@
     private string DecToHex { get; set; }
     private string HexLeToHex { get; set; }
     private string VarIntToDecimal { get; set; }
+    private string BitsToDifficulty { get; set; }
 
     private string ResultHexToDec{ get; set; }
     private string ResultDecToHex { get; set; }
     private string ResultHexLeToHex { get; set; }
     private string ResultVarIntToDec { get; set; }
+    private string ResultBitsToDifficulty { get; set; }
     
     private void ConvertHexToDec()
         => ResultHexToDec = NumConverter.ConvertHexToDec(HexToDec);
-    
     
     private void ConvertDecToHex()
         => ResultDecToHex = NumConverter.ConvertDecToHex(DecToHex);
@@ -81,4 +88,8 @@
 
     private void ConvertVarIntToDecimal()
         => ResultVarIntToDec = NumConverter.ConvertVarIntToDecimal(VarIntToDecimal);
+
+    private void ConvertBitsToDifficulty()
+        => ResultBitsToDifficulty = NumConverter.ConvertBitsLeToDifficulty(BitsToDifficulty);
+
 }

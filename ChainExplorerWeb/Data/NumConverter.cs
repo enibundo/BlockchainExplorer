@@ -26,11 +26,8 @@ namespace ChainExplorerWeb.Data
         }
 
         public string ConvertDecToHex(string dec)
-        {
-            var bigInteger = System.Numerics.BigInteger.Parse(dec);
-
-            return BitConverter.ToString(bigInteger.ToByteArray()).Replace("-", string.Empty);
-        }
+            =>  ToString(System.Numerics.BigInteger.Parse(dec));
+        
 
         public string ConvertHexLeToHex(string hexLe)
         {
@@ -52,6 +49,25 @@ namespace ChainExplorerWeb.Data
             var vInt = _hexReader.ReadVarInt(binaryReader, out _);
             
             return vInt.ToString();
+        }
+
+        public string ConvertBitsLeToDifficulty(string bits)
+        {
+            
+            // 0x0404cb * 2**(8*(0x1b - 3)) = 0x00000000000404CB000000000000000000000000000000000000000000000000
+                
+            var bytesLittleEndian = _hexReader.ToByteArray(bits, Endian.Little);
+            var bytesBigEndian = bytesLittleEndian.Reverse().ToArray();
+
+            var theBase = new System.Numerics.BigInteger(bytesBigEndian[1..4]);
+            var thePower = 8 * bytesLittleEndian[0]-3;
+            var res = theBase * (System.Numerics.BigInteger.Pow(2, thePower));
+            return ToString(res);
+        }
+
+        private static string ToString(System.Numerics.BigInteger bi)
+        {
+            return BitConverter.ToString(bi.ToByteArray()).Replace("-", string.Empty);
         }
     }
 }
