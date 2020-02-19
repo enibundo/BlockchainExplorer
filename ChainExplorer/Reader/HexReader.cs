@@ -40,14 +40,14 @@ namespace ChainExplorer.Reader
 
         public byte[] ToByteArray(string hexString, Endian endian = Endian.Little)
         {
-            var nextCounter = endian == Endian.Little 
+            var nextCounter = endian == Endian.Big 
                 ? (Func<int, int>)(x => x + 1) 
                 : (x => x - 1);
 
             if (hexString.Length % 2 != 0)
                 hexString = "0" + hexString;
 
-            var counter = endian == Endian.Little ?  0 : (hexString.Length / 2 - 1);
+            var counter = endian == Endian.Big ?  0 : (hexString.Length / 2 - 1);
             var ret = new byte[hexString.Length / 2];
 
             for (var i = 0; i < hexString.Length; i = i + 2)

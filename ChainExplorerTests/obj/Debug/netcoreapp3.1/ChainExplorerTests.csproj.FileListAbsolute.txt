@@ -95,3 +95,14 @@
 /home/eni/Documents/code/BlockchainExplorer/ChainExplorerTests/obj/Debug/netcoreapp3.1/ChainExplorerTests.dll
 /home/eni/Documents/code/BlockchainExplorer/ChainExplorerTests/obj/Debug/netcoreapp3.1/ChainExplorerTests.pdb
 /home/eni/Documents/code/BlockchainExplorer/ChainExplorerTests/bin/Debug/netcoreapp3.1/Secp256k1.Net.dll
+/home/eni/Documents/code/BlockchainExplorer/ChainExplorerTests/bin/Debug/netcoreapp3.1/ChainExplorerWeb.Views.dll
+/home/eni/Documents/code/BlockchainExplorer/ChainExplorerTests/bin/Debug/netcoreapp3.1/ChainExplorerWeb.Views.pdb
+/home/eni/Documents/code/BlockchainExplorer/ChainExplorerTests/bin/Debug/netcoreapp3.1/appsettings.Development.json
+/home/eni/Documents/code/BlockchainExplorer/ChainExplorerTests/bin/Debug/netcoreapp3.1/appsettings.json
+/home/eni/Documents/code/BlockchainExplorer/ChainExplorerTests/bin/Debug/netcoreapp3.1/Properties/launchSettings.json
+/home/eni/Documents/code/BlockchainExplorer/ChainExplorerTests/bin/Debug/netcoreapp3.1/ChainExplorerWeb
+/home/eni/Documents/code/BlockchainExplorer/ChainExplorerTests/bin/Debug/netcoreapp3.1/BigInteger.dll
+/home/eni/Documents/code/BlockchainExplorer/ChainExplorerTests/bin/Debug/netcoreapp3.1/Castle.Core.dll
+/home/eni/Documents/code/BlockchainExplorer/ChainExplorerTests/bin/Debug/netcoreapp3.1/Moq.dll
+/home/eni/Documents/code/BlockchainExplorer/ChainExplorerTests/bin/Debug/netcoreapp3.1/ChainExplorerWeb.dll
+/home/eni/Documents/code/BlockchainExplorer/ChainExplorerTests/bin/Debug/netcoreapp3.1/ChainExplorerWeb.pdb

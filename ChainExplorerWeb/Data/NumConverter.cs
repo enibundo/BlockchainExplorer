@@ -56,10 +56,12 @@ namespace ChainExplorerWeb.Data
             
             // 0x0404cb * 2**(8*(0x1b - 3)) = 0x00000000000404CB000000000000000000000000000000000000000000000000
                 
-            var bytesLittleEndian = _hexReader.ToByteArray(bits, Endian.Little);
+            var bytesLittleEndian = _hexReader.ToByteArray(bits, Endian.Big);
             var bytesBigEndian = bytesLittleEndian.Reverse().ToArray();
 
-            var theBase = new System.Numerics.BigInteger(bytesBigEndian[1..4]);
+            var threeLastBytes = bytesBigEndian[1..4].Reverse().ToArray();
+            
+            var theBase = new System.Numerics.BigInteger(threeLastBytes);
             var thePower = 8 * bytesLittleEndian[0]-3;
             var res = theBase * (System.Numerics.BigInteger.Pow(2, thePower));
             return ToString(res);
