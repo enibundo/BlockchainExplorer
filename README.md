@@ -1,6 +1,7 @@
 # BlockchainExplorer
 
-Just a simple block parser written in c#.
+Just a simple _WIP_ block parser written in c#.
+Do not use this unless for educational purposes.
 
 ## Needs:
 netcore 3.1
