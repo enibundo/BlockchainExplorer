@@ -20,7 +20,7 @@ namespace ChainExplorer.Reader
         public Block ReadBlock(LoggedBinaryReader binaryReader)
         {
             var blockHeader = binaryReader.ReadBytes(80);
-            var nbTransactions = _hexReader.ReadVarInt(binaryReader, out var sizeOfNbTransactions);
+            var nbTransactions = _hexReader.ReadVarInt(binaryReader, Endian.Little, out var sizeOfNbTransactions);
             
             // todo: use transactions pool here.
             var transactions = new Transaction[nbTransactions];
@@ -36,7 +36,7 @@ namespace ChainExplorer.Reader
         public Block ReadBlock(LoggedBinaryReader binaryReader, Action<Transaction> onReadTransaction)
         {
             var blockHeader = binaryReader.ReadBytes(80);
-            var nbTransactions = _hexReader.ReadVarInt(binaryReader, out var sizeOfNbTransactions);
+            var nbTransactions = _hexReader.ReadVarInt(binaryReader, Endian.Little, out var sizeOfNbTransactions);
             
             // todo: use transactions pool here.
             var transactions = new Transaction[nbTransactions];
@@ -54,7 +54,7 @@ namespace ChainExplorer.Reader
         {
             var version = binaryReader.ReadUInt32();
             
-            var countTransactionInputs = _hexReader.ReadVarInt(binaryReader, out _);
+            var countTransactionInputs = _hexReader.ReadVarInt(binaryReader, Endian.Little,  out _);
             var hasWitness = countTransactionInputs == 0;
             
             if (hasWitness)
@@ -62,7 +62,7 @@ namespace ChainExplorer.Reader
                 // todo: use SegWit
                 var __ = binaryReader.ReadByte(); 
                 
-                countTransactionInputs = _hexReader.ReadVarInt(binaryReader, out _);
+                countTransactionInputs = _hexReader.ReadVarInt(binaryReader, Endian.Little, out _);
             }
             
             // todo: use transaction input pool here
@@ -72,7 +72,7 @@ namespace ChainExplorer.Reader
                 transactionInputs[i] = ReadTransactionInput(binaryReader);
             }
 
-            var countTransactionOutputs = _hexReader.ReadVarInt(binaryReader, out _);
+            var countTransactionOutputs = _hexReader.ReadVarInt(binaryReader, Endian.Little, out _);
 
             // todo: use transaction output pool here
             var transactionOutputs = new TransactionOutput[countTransactionOutputs];
@@ -87,7 +87,7 @@ namespace ChainExplorer.Reader
             {
                 for (var i = 0; i < countTransactionInputs; i++)
                 {
-                    var countWitnessStackItems = _hexReader.ReadVarInt(binaryReader, out _);
+                    var countWitnessStackItems = _hexReader.ReadVarInt(binaryReader, Endian.Little, out _);
                     for (var j = 0; j < countWitnessStackItems; j++)
                     {
                         witnessAsciiStrings.Add(_hexReader.ReadVarString(binaryReader));

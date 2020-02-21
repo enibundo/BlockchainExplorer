@@ -45,7 +45,7 @@ namespace ChainExplorerWeb.Data
         {
             var b = _hexReader.ToByteArray(varInt, Endian.Big);
             var binaryReader = new BinaryReader(new MemoryStream(b));
-            var vInt = _hexReader.ReadVarInt(binaryReader, out _);
+            var vInt = _hexReader.ReadVarInt(binaryReader, Endian.Little, out _);
             
             return vInt.ToString();
         }

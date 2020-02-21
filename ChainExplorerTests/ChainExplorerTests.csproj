@@ -19,4 +19,14 @@
       <ProjectReference Include="..\ChainExplorer\ChainExplorer.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="data" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Update="data\pizza_transaction_hex.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
+
 </Project>

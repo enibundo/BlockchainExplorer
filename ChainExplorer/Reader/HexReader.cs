@@ -21,6 +21,16 @@ namespace ChainExplorer.Reader
             return 0;
         }
 
+        public void SwapEndianness(byte[] data)
+        {
+            for (var i = 0; i < data.Length / 2; i++)
+            {
+                var tmp = data[i];
+                data[i] = data[^(i + 1)];
+                data[^(i + 1)] = tmp;
+            }
+        }
+
         public byte ToByte(char first, char second)
         {
             return (byte)(ToByte(first) * 16 + ToByte(second));
@@ -38,7 +48,7 @@ namespace ChainExplorer.Reader
             return ret;
         }
 
-        public byte[] ToByteArray(string hexString, Endian endian = Endian.Little)
+        public byte[] ToByteArray(string hexString, Endian endian = Endian.Big)
         {
             var nextCounter = endian == Endian.Big 
                 ? (Func<int, int>)(x => x + 1) 
@@ -50,7 +60,7 @@ namespace ChainExplorer.Reader
             var counter = endian == Endian.Big ?  0 : (hexString.Length / 2 - 1);
             var ret = new byte[hexString.Length / 2];
 
-            for (var i = 0; i < hexString.Length; i = i + 2)
+            for (var i = 0; i < hexString.Length; i += 2)
             {
                 var first = hexString[i];
                 var second = hexString[i + 1];
@@ -71,39 +81,39 @@ namespace ChainExplorer.Reader
         
         public AsciiString ReadVarString(BinaryReader binaryReader)
         {
-            var count = ReadVarInt(binaryReader, out var varIntSize);
+            var count = ReadVarInt(binaryReader, Endian.Little, out var varIntSize);
             var data = binaryReader.ReadBytes((int)count);
 
             // todo: have pools of AsciiString
             return new AsciiString(varIntSize, data);
         }
 
-        public long ReadVarInt(BinaryReader binaryReader, out int sizeOfVarInt)
+        public long ReadVarInt(BinaryReader binaryReader, Endian endian, out int sizeOfVarInt)
         {
             var firstByte = binaryReader.ReadByte();
 
             var size = (VarIntSize)firstByte;
             var nbElements = size.ToBytesLength();
-
+            
             sizeOfVarInt = nbElements + 1;
 
             if (nbElements == 0)
             {
                 return firstByte;
             }
-            else
+
+            var data = binaryReader.ReadBytes(nbElements);
+            var value = 0L;
+            
+            if (endian == Endian.Little)
+                SwapEndianness(data);
+            
+            for (var i = 0; i < data.Length; i++)
             {
-                var data = binaryReader.ReadBytes(nbElements);
-
-                var value = (long)data[0];
-
-                for (var i = 1; i < data.Length; i++)
-                {
-                    value = value | data[i] << (8 * i);
-                }
-
-                return value;
+                value = value | data[i] << (8 * (data.Length-i-1));
             }
+
+            return value;
         }
     }
 }

@@ -76,12 +76,16 @@
       </e>
       <e p="ChainExplorer.sln" t="IncludeFlat" />
       <e p="ChainExplorerTests" t="IncludeRecursive">
+        <e p="BitcoinReaderTests.cs" t="Include" />
         <e p="ChainExplorerTests.csproj" t="IncludeRecursive" />
         <e p="HexReaderTests.cs" t="Include" />
         <e p="NumConverterTests.cs" t="Include" />
         <e p="Secp256K1HelperTests.cs" t="Include" />
         <e p="TransactionBinaryReaderTests.cs" t="Include" />
         <e p="bin" t="ExcludeRecursive" />
+        <e p="data" t="Include">
+          <e p="pizza_transaction_hex.txt" t="Include" />
+        </e>
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
             <e p="netcoreapp3.1" t="Include">

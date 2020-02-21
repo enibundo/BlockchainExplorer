@@ -42,5 +42,8 @@ namespace ChainExplorer.Reader
 
         private byte ReadOneByte() => _binaryReader?.ReadByte() ?? base.ReadByte();
         public Span<byte> AsSpan() => _data[.._position].AsSpan();
+
+        public static LoggedBinaryReader FromAsciiFile(string asciiFilePath) 
+            => new LoggedBinaryReader(new FileStream(asciiFilePath, FileMode.Open));
     }
 }
