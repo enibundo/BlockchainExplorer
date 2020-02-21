@@ -18,8 +18,7 @@ namespace ChainExplorerWeb.Data
         
         public string ConvertHexToDec(string hex)
         {
-            var res = _hexReader.ToByteArray(hex, Endian.Big).Reverse().ToArray();
-
+            var res = _hexReader.ToByteArray(hex, Endian.Big).ToArray();
             var bigInteger = new BigInteger(res);
             
             return bigInteger.ToString();   
@@ -44,7 +43,7 @@ namespace ChainExplorerWeb.Data
 
         public string ConvertVarIntToDecimal(string varInt)
         {
-            var b = _hexReader.ToByteArray(varInt, Endian.Little);
+            var b = _hexReader.ToByteArray(varInt, Endian.Big);
             var binaryReader = new BinaryReader(new MemoryStream(b));
             var vInt = _hexReader.ReadVarInt(binaryReader, out _);
             
@@ -56,14 +55,16 @@ namespace ChainExplorerWeb.Data
             
             // 0x0404cb * 2**(8*(0x1b - 3)) = 0x00000000000404CB000000000000000000000000000000000000000000000000
                 
-            var bytesLittleEndian = _hexReader.ToByteArray(bits, Endian.Big);
-            var bytesBigEndian = bytesLittleEndian.Reverse().ToArray();
+            var bytes = _hexReader.ToByteArray(bits, Endian.Little);
 
-            var threeLastBytes = bytesBigEndian[1..4].Reverse().ToArray();
+            var threeLastBytes = bytes[1..4].ToArray();
             
             var theBase = new System.Numerics.BigInteger(threeLastBytes);
-            var thePower = 8 * bytesLittleEndian[0]-3;
+            
+            var thePower = 8 * bytes[0] - 3;
+            
             var res = theBase * (System.Numerics.BigInteger.Pow(2, thePower));
+            
             return ToString(res);
         }
 

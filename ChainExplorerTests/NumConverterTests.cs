@@ -19,7 +19,7 @@ namespace ChainExplorerTests
         }
 
         [Test]
-        public void should_conver_bits_to_difficulty()
+        public void should_convert_bits_to_difficulty()
         {
             // arrange
             var input = "cb04041b";
@@ -32,7 +32,9 @@ namespace ChainExplorerTests
             // 404CB000000000000000000000000000000000000000000000000
             
             // "0x0404cb * 2**(8*(0x1b - 3)) = 0x00000000000404CB000000000000000000000000000000000000000000000000";
-            _hexReader.Setup(x => x.ToByteArray(input, Endian.Little)).Returns(bitsField);
+            _hexReader
+                .Setup(x => x.ToByteArray(input, Endian.Little))
+                .Returns(bitsField);
             
             // act
             var result = _numConverter.ConvertBitsLeToDifficulty(input);

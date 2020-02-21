@@ -14,7 +14,7 @@
         "outputPath": "/home/eni/Documents/code/BlockchainExplorer/ChainExplorer/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/home/eni/.config/NuGet/NuGet.Config"
+          "/home/eni/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"

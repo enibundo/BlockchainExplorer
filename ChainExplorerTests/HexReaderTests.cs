@@ -47,6 +47,5 @@ namespace ChainExplorerTests
             Assert.AreEqual(2, res[1]);
             Assert.AreEqual(1, res[2]);
         }
-
     }
 }
