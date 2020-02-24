@@ -8,9 +8,8 @@ netcore 3.1
 
 ## Running locally:
 
-cd BlockchainExplorerWeb
-
-dotnet run
+  cd BlockchainExplorerWeb
+  dotnet run
 
 visit : https://localhost:50001
 
