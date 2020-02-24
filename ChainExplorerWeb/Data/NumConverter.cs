@@ -57,20 +57,41 @@ namespace ChainExplorerWeb.Data
                 
             var bytes = _hexReader.ToByteArray(bits, Endian.Little);
 
-            var threeLastBytes = bytes[1..4].ToArray();
+            var num = new byte[4]
+            {
+                bytes[3],
+                bytes[2],
+                bytes[1],
+                0
+            };
             
-            var theBase = new System.Numerics.BigInteger(threeLastBytes);
+            var theBase = BitConverter.ToUInt32(num);
             
-            var thePower = 8 * bytes[0] - 3;
+            var thePower = 8 * (bytes[0] - 3);
+
+            var res = new BigInteger(1);
+
+            for (var i = 0; i < thePower; i++) 
+                res *= 2;
+
+            var result = ToString(theBase*res);
             
-            var res = theBase * (System.Numerics.BigInteger.Pow(2, thePower));
-            
-            return ToString(res);
+            return new string('0', 64-result.Length) + result;
         }
 
+        private static string ToString(BigInteger bi)
+        {
+            return BitConverter
+                .ToString(bi.getBytes())
+                .Replace("-", string.Empty);
+        }
+        
         private static string ToString(System.Numerics.BigInteger bi)
         {
-            return BitConverter.ToString(bi.ToByteArray()).Replace("-", string.Empty);
+            return BitConverter
+                .ToString(bi.ToByteArray())
+                .Replace("-", string.Empty);
         }
+        
     }
 }

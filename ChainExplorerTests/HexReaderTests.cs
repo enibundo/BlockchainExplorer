@@ -92,6 +92,17 @@ namespace ChainExplorerTests
             Assert.AreEqual(1, bytes[1]);
         }
 
+        [Test]
+        public void should_not_throw_if_swapping_empty_array()
+        {
+            // arrange
+            var bytes = new byte[] {};
+
+            // act    
+            Assert.DoesNotThrow(()=>_hexReader.SwapEndianness(bytes));
+            Assert.IsEmpty(bytes);
+        }
+
         
         private static BinaryReader ToBinaryReader(byte[] bytes)
         {
