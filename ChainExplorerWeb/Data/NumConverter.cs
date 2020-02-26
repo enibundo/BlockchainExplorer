@@ -18,8 +18,8 @@ namespace ChainExplorerWeb.Data
         
         public string ConvertHexToDec(string hex)
         {
-            var res = _hexReader.ToByteArray(hex, Endian.Big).ToArray();
-            var bigInteger = new BigInteger(res);
+            var result = _hexReader.ToByteArray(hex, Endian.Big).ToArray();
+            var bigInteger = new BigInteger(result);
             
             return bigInteger.ToString();   
         }
@@ -30,31 +30,28 @@ namespace ChainExplorerWeb.Data
 
         public string ConvertHexLeToHex(string hexLe)
         {
-            var ret = new StringBuilder();
+            var result = new StringBuilder();
 
             for (var i = 0; i < hexLe.Length; i = i + 2)
             {
-                ret.Append(hexLe[^(i + 2)]);
-                ret.Append(hexLe[^(i + 1)]);
+                result.Append(hexLe[^(i + 2)]);
+                result.Append(hexLe[^(i + 1)]);
             }
 
-            return ret.ToString();
+            return result.ToString();
         }
 
         public string ConvertVarIntToDecimal(string varInt)
         {
-            var b = _hexReader.ToByteArray(varInt, Endian.Big);
-            var binaryReader = new BinaryReader(new MemoryStream(b));
+            var bytes = _hexReader.ToByteArray(varInt, Endian.Big);
+            var binaryReader = new BinaryReader(new MemoryStream(bytes));
             var vInt = _hexReader.ReadVarInt(binaryReader, Endian.Little, out _);
             
             return vInt.ToString();
         }
 
-        public string ConvertBitsLeToDifficulty(string bits)
+        private BigInteger ConvertBitsToBigIntResult(string bits)
         {
-            
-            // 0x0404cb * 2**(8*(0x1b - 3)) = 0x00000000000404CB000000000000000000000000000000000000000000000000
-                
             var bytes = _hexReader.ToByteArray(bits, Endian.Little);
 
             var num = new byte[4]
@@ -74,9 +71,23 @@ namespace ChainExplorerWeb.Data
             for (var i = 0; i < thePower; i++) 
                 res *= 2;
 
-            var result = ToString(theBase*res);
-            
+            return theBase * res;
+        }
+        
+        public string ConvertBitsLeToTarget(string bits)
+        {
+            var result = ToString(ConvertBitsToBigIntResult(bits));
             return new string('0', 64-result.Length) + result;
+        }
+
+        public string ConvertBitsToDifficulty(string bits)
+        {
+            var poolDifficultyOne = "00000000FFFF0000000000000000000000000000000000000000000000000000";
+                
+            var bigIntegerResult = ConvertBitsToBigIntResult(bits);
+            var v = new BigInteger(_hexReader.ToByteArray(poolDifficultyOne, Endian.Big));
+            
+            return (v / bigIntegerResult).ToString();
         }
 
         private static string ToString(BigInteger bi)

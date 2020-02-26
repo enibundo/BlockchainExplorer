@@ -42,7 +42,6 @@
 <td>@ResultHexLeToHex</td>
 </tr>
 
-
 <tr>
 <td>
 <h4>VarInt to decimal</h4>
@@ -54,12 +53,23 @@
 
 <tr>
 <td>
+<h4>Bits to Target</h4>
+<input type="text" class="form-control" @bind="@BitsToTarget"/><br/>
+<button class="btn btn-info" @onclick="@ConvertBitsToTarget">Convert</button>
+</td>
+<td>@ResultBitsToTarget</td>
+</tr>
+
+
+<tr>
+<td>
 <h4>Bits to Difficulty</h4>
 <input type="text" class="form-control" @bind="@BitsToDifficulty"/><br/>
 <button class="btn btn-info" @onclick="@ConvertBitsToDifficulty">Convert</button>
 </td>
 <td>@ResultBitsToDifficulty</td>
 </tr>
+
 </table>
 
 @code {
@@ -68,20 +78,21 @@
     private string DecToHex { get; set; }
     private string HexLeToHex { get; set; }
     private string VarIntToDecimal { get; set; }
+    private string BitsToTarget { get; set; }    
     private string BitsToDifficulty { get; set; }
 
     private string ResultHexToDec{ get; set; }
     private string ResultDecToHex { get; set; }
     private string ResultHexLeToHex { get; set; }
     private string ResultVarIntToDec { get; set; }
+    private string ResultBitsToTarget { get; set; }
     private string ResultBitsToDifficulty { get; set; }
-    
+
     private void ConvertHexToDec()
         => ResultHexToDec = NumConverter.ConvertHexToDec(HexToDec);
     
     private void ConvertDecToHex()
         => ResultDecToHex = NumConverter.ConvertDecToHex(DecToHex);
-
 
     private void ConvertHexLeToHex()
         => ResultHexLeToHex = NumConverter.ConvertHexLeToHex(HexLeToHex);
@@ -89,7 +100,10 @@
     private void ConvertVarIntToDecimal()
         => ResultVarIntToDec = NumConverter.ConvertVarIntToDecimal(VarIntToDecimal);
 
+    private void ConvertBitsToTarget()
+        => ResultBitsToTarget = NumConverter.ConvertBitsLeToTarget(BitsToTarget);
+
     private void ConvertBitsToDifficulty()
-        => ResultBitsToDifficulty = NumConverter.ConvertBitsLeToDifficulty(BitsToDifficulty);
+        => ResultBitsToDifficulty = NumConverter.ConvertBitsToDifficulty(BitsToDifficulty);
 
 }

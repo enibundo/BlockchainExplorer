@@ -11,12 +11,27 @@ namespace ChainExplorerTests
     {
         private NumConverter _numConverter;
         private Mock<IHexReader> _hexReader;
+        private string _poolDifficultyOne;
+        private byte[] _poolDifficultyOneBytes;
 
         [SetUp]
         public void Setup()
         {
             _hexReader = new Mock<IHexReader>();
             _numConverter = new NumConverter(_hexReader.Object);
+
+            _poolDifficultyOne = "00000000FFFF0000000000000000000000000000000000000000000000000000";
+            _poolDifficultyOneBytes = new byte[]
+            {
+                0, 0, 0, 0, 255, 255, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0
+            };
+
+            _hexReader
+                .Setup(x => x.ToByteArray(_poolDifficultyOne, Endian.Big))
+                .Returns(_poolDifficultyOneBytes);
         }
 
         /*
@@ -32,7 +47,7 @@ namespace ChainExplorerTests
             
          */
         [Test]
-        public void should_convert_bits_to_difficulty()
+        public void should_convert_bits_to_target()
         {
             // arrange
             var input = "cb04041b";
@@ -44,10 +59,28 @@ namespace ChainExplorerTests
                 .Returns(bigEndianBytes);
             
             // act
-            var result = _numConverter.ConvertBitsLeToDifficulty(input);
+            var result = _numConverter.ConvertBitsLeToTarget(input);
 
             // assert
             Assert.AreEqual(expectedResult, result);
+        }
+
+        [Test]
+        public void should_convert_bits_to_difficulty()
+        {
+            // arrange
+            var input = "cb04041b";
+            var bigEndianBytes = new byte[4] {0x1b, 0x04, 0x04, 0xcb};
+            
+            _hexReader
+                .Setup(x => x.ToByteArray(input, Endian.Little))
+                .Returns(bigEndianBytes);
+
+            // act
+            var result = _numConverter.ConvertBitsToDifficulty(input);
+            
+            // assert
+            
         }
     }
 }
