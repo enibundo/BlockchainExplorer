@@ -1,6 +1,6 @@
 # BlockchainExplorer
 
-Just a simple _WIP_ block parser written in c#.
+Just a simple _WIP_ bitcoin chain parser written in c#.
 Do not use this unless for educational purposes.
 
 ## Needs:
@@ -8,9 +8,8 @@ netcore 3.1
 
 ## Running locally:
 
-cd BlockchainExplorerWeb
-
-dotnet run
+    cd BlockchainExplorerWeb
+    dotnet run
 
 visit : https://localhost:50001
 
