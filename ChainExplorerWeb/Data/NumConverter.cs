@@ -52,6 +52,7 @@ namespace ChainExplorerWeb.Data
             return vInt.ToString();
         }
 
+        // https://en.bitcoin.it/wiki/Difficulty
         private BigInteger ConvertBitsToBigIntResult(string bits)
         {
             var bytes = _hexReader.ToByteArray(bits, Endian.Little);
@@ -64,27 +65,17 @@ namespace ChainExplorerWeb.Data
                 0
             };
             
-            Console.WriteLine($"num : {num[0]}, {num[1]}, {num[2]}, {num[3]}");
-            
             var theBase = BitConverter.ToUInt32(num);
-            
-            Console.WriteLine($"the base :  {theBase}");
-            
             var thePower = 8 * (bytes[0] - 3);
 
-            Console.WriteLine($"the power :  {thePower}");
 
             var res = new BigInteger(1);
 
             for (var i = 0; i < thePower; i++) 
                 res *= 2;
 
-            Console.WriteLine($"res = {res}");
-            
             var result = theBase * res;
             
-            Console.WriteLine($"bits = {bits} => result = {result}");
-
             return result;
         }
         
