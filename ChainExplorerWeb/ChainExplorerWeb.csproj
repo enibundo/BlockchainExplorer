@@ -8,8 +8,4 @@
     <ProjectReference Include="..\ChainExplorer\ChainExplorer.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="BigInteger" Version="1.0.7" />
-  </ItemGroup>
-
 </Project>

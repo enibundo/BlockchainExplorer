@@ -17,7 +17,7 @@
 
 <tr>
 <td>
-<h4>Hexadecimal to decimal</h4>
+<h4>Hexadecimal to decimal (ex: deadbeef)</h4>
 <input type="text" class="form-control" @bind="@HexToDec"/><br/>
 <button class="btn btn-info" @onclick="@ConvertHexToDec">Convert</button>
 </td>
@@ -26,7 +26,7 @@
 
 <tr>
 <td>
-<h4>Decimal hexadecimal</h4>
+<h4>Decimal hexadecimal (ex: 42)</h4>
 <input type="text" class="form-control" @bind="@DecToHex"/><br/>
 <button class="btn btn-info" @onclick="@ConvertDecToHex">Convert</button>
 </td>
@@ -35,7 +35,7 @@
 
 <tr>
 <td>
-<h4>Hexadecimal little endian to hexadecimal</h4>
+<h4>Hexadecimal little endian to hexadecimal (ex: efbeadde)</h4>
 <input type="text" class="form-control" @bind="@HexLeToHex"/><br/>
 <button class="btn btn-info" @onclick="@ConvertHexLeToHex">Convert</button>
 </td>
@@ -44,7 +44,7 @@
 
 <tr>
 <td>
-<h4>VarInt to decimal</h4>
+<h4>VarInt to decimal (ex: fdbeef)</h4>
 <input type="text" class="form-control" @bind="@VarIntToDecimal"/><br/>
 <button class="btn btn-info" @onclick="@ConvertVarIntToDecimal">Convert</button>
 </td>
@@ -53,7 +53,7 @@
 
 <tr>
 <td>
-<h4>Bits to Target</h4>
+<h4>Bits to Target (ex: cb04041b)</h4>
 <input type="text" class="form-control" @bind="@BitsToTarget"/><br/>
 <button class="btn btn-info" @onclick="@ConvertBitsToTarget">Convert</button>
 </td>
@@ -63,7 +63,7 @@
 
 <tr>
 <td>
-<h4>Bits to Difficulty</h4>
+<h4>Bits to Difficulty (ex: cb04041b)</h4>
 <input type="text" class="form-control" @bind="@BitsToDifficulty"/><br/>
 <button class="btn btn-info" @onclick="@ConvertBitsToDifficulty">Convert</button>
 </td>

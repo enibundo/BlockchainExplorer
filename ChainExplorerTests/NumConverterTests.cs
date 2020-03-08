@@ -65,22 +65,39 @@ namespace ChainExplorerTests
             Assert.AreEqual(expectedResult, result);
         }
 
+        /*
+         // 
+         
         [Test]
         public void should_convert_bits_to_difficulty()
         {
             // arrange
             var input = "cb04041b";
-            var bigEndianBytes = new byte[4] {0x1b, 0x04, 0x04, 0xcb};
+            var bigEndianBytes = new byte[4] {0x1b, 0x04, 0xcb, 0x04, };
+            var poolDifficultyOne = new byte[]
+            {   
+                0,0,0,0,0,
+                0,0,0,0,0,
+                0,0,0,0,0,
+                0,0,0,0,0,
+                0,0,0,0,0,
+                0,255,255,0,
+                0,0,0};
             
             _hexReader
                 .Setup(x => x.ToByteArray(input, Endian.Little))
                 .Returns(bigEndianBytes);
 
+            _hexReader
+                .Setup(x => x.ToByteArray(It.IsAny<string>(), Endian.Big))
+                .Returns(poolDifficultyOne);
+                
             // act
             var result = _numConverter.ConvertBitsToDifficulty(input);
             
             // assert
-            
+            Assert.IsTrue(result.StartsWith("16307.42"));
         }
+        */
     }
 }
